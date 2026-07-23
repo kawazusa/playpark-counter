@@ -17,7 +17,8 @@ import {
   ChevronRight,
   UserCheck,
   Check,
-  Megaphone
+  Megaphone,
+  BookOpen
 } from 'lucide-react';
 
 interface AdminPanelProps {
@@ -67,6 +68,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [pinError, setPinError] = useState<boolean>(false);
   const [editingRecord, setEditingRecord] = useState<VisitorRecord | null>(null);
+  const [showManual, setShowManual] = useState<boolean>(false);
   
   // Table search and pagination state
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -82,6 +84,23 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
   const handleSaveAnnouncement = () => {
     localStorage.setItem('playpark_announcement', announcementText);
     alert("お知らせを保存しました！登録完了画面に反映されます。");
+  };
+
+  const handleClearAllData = async () => {
+    const confirmation1 = window.confirm("⚠️ 警告 ⚠️\nデータベース内のすべての来場者レコードを削除します。\n事前にCSVエクスポートを実行しましたか？");
+    if (!confirmation1) return;
+
+    const confirmation2 = window.confirm("本当にすべてのデータを削除してよろしいですか？\nこの操作は取り消せません。");
+    if (!confirmation2) return;
+
+    try {
+      await db.visitorRecords.clear();
+      alert("すべてのデータを削除しました。");
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Failed to clear data:", error);
+      alert("データの削除に失敗しました。");
+    }
   };
 
   // Retrieve records from Dexie ordered by timestamp descending
@@ -362,13 +381,29 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
           </h2>
         </div>
         
-        <div className="flex w-full sm:w-auto gap-3">
+        <div className="flex flex-wrap w-full sm:w-auto gap-2.5">
+          <button
+            onClick={() => setShowManual(true)}
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4.5 py-3 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl transition border border-slate-200"
+          >
+            <BookOpen className="w-4 h-4 text-indigo-600" />
+            マニュアル
+          </button>
+
           <button
             onClick={exportToCSV}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl transition shadow-md shadow-emerald-600/10"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4.5 py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl transition shadow-md shadow-emerald-600/10"
           >
             <Download className="w-4 h-4" />
-            CSVエクスポート (Excel用)
+            CSV出力 (Excel用)
+          </button>
+
+          <button
+            onClick={handleClearAllData}
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4.5 py-3 text-sm font-bold text-rose-650 bg-rose-50 hover:bg-rose-100 active:scale-95 rounded-xl transition border border-rose-200"
+          >
+            <Trash2 className="w-4 h-4" />
+            データ全消去
           </button>
         </div>
       </div>
@@ -799,6 +834,103 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Staff Manual Modal */}
+      {showManual && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl w-full max-w-2xl p-6 md:p-8 shadow-2xl animate-scale-in border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-6 pb-3 border-b border-slate-100">
+              <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-indigo-600" />
+                スタッフ向け運営マニュアル
+              </h3>
+              <button 
+                onClick={() => setShowManual(false)}
+                className="p-1.5 rounded-full text-slate-400 hover:bg-slate-100 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-6 text-sm text-slate-700 leading-relaxed font-medium">
+              
+              {/* Point 1 */}
+              <div>
+                <h4 className="text-base font-black text-slate-900 mb-1.5 flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  1. インターネット環境とオフライン動作
+                </h4>
+                <p className="pl-4 text-slate-600">
+                  本アプリは<strong>オフライン対応 (PWA)</strong>です。屋外のプレイパークなどインターネット環境がない場所でも動作します。<br />
+                  一度ネットに繋がった状態でアプリを開けば、その後は電波がなくても（機内モードでも）ページを開いて来場登録を行うことができます。データは端末内の安全な領域（IndexedDB）に保存されます。
+                </p>
+              </div>
+
+              {/* Point 2 */}
+              <div>
+                <h4 className="text-base font-black text-slate-900 mb-1.5 flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  2. ローカル実行時の重要な注意点（データ消失防止）
+                </h4>
+                <p className="pl-4 text-slate-600 mb-2">
+                  データはブラウザの「ローカルデータベース」に保存されています。以下の操作を行うと<strong>データが消えてしまう</strong>ため、スタッフの皆様は絶対に行わないでください。
+                </p>
+                <ul className="pl-8 list-disc text-slate-655 space-y-1">
+                  <li>ブラウザの「キャッシュ消去」「閲覧履歴の全削除」「サイトデータの削除」</li>
+                  <li>シークレットモード（プライベートブラウズ）での利用（タブを閉じるとデータが消えます）</li>
+                </ul>
+              </div>
+
+              {/* Point 3 */}
+              <div>
+                <h4 className="text-base font-black text-slate-900 mb-1.5 flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-sky-500" />
+                  3. 複数端末間でのデータの共有について
+                </h4>
+                <p className="pl-4 text-slate-600">
+                  本アプリは個人情報保護とオフライン動作のため、クラウドサーバーにデータを送信しません。<br />
+                  そのため、<strong>「データは入力した端末の中だけ」</strong>に保存されます。複数台のタブレットを同時に使用した場合、データは同期されません。<br />
+                  【対策】集計時は、各タブレットからそれぞれ「CSV出力」を行ってファイルをダウンロードし、Excel等で合算・集計してください。
+                </p>
+              </div>
+
+              {/* Point 4 */}
+              <div>
+                <h4 className="text-base font-black text-slate-900 mb-1.5 flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+                  4. データリセット方針
+                </h4>
+                <p className="pl-4 text-slate-600">
+                  新しい開催日を迎える際、古いデータが残ったままだと混ざってしまいます。<br />
+                  <strong>一日の運営終了後、または新しい日の開始前</strong>に、データをCSVで書き出したことを確認した上で、ヘッダーの「データ全消去」ボタンから端末のデータを空にしてください。
+                </p>
+              </div>
+
+              {/* Point 5 */}
+              <div>
+                <h4 className="text-base font-black text-slate-900 mb-1.5 flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-purple-500" />
+                  5. タブレットでの利用推奨設定（PWAインストール）
+                </h4>
+                <p className="pl-4 text-slate-600">
+                  iPadやAndroidタブレットのブラウザ（SafariやChrome）でURLを開いた後、<strong>「ホーム画面に追加」</strong>を行ってください。<br />
+                  ホーム画面のアイコンから起動すると、アドレスバーのない全画面モードで起動し、一般の利用者が誤ってブラウザを閉じたり他のページへ移動するのを防ぐことができます。
+                </p>
+              </div>
+
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-slate-100 flex justify-end">
+              <button
+                onClick={() => setShowManual(false)}
+                className="py-3 px-6 text-sm font-bold text-white bg-slate-700 hover:bg-slate-800 rounded-xl transition active:scale-95 shadow-md"
+              >
+                閉じる
+              </button>
+            </div>
           </div>
         </div>
       )}
