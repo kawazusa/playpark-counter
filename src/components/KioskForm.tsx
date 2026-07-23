@@ -527,8 +527,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 <button
                   onClick={() => {
                     setFirstTime(false);
-                    // Bypasses reason step directly to confirm
-                    setStepIndex(stepIndex + 2); 
+                    setStepIndex(5);
                   }}
                   className="flex-1 py-10 px-6 text-2xl font-black rounded-3xl border-2 transition-all active:scale-95 flex flex-col items-center justify-center gap-3 border-slate-100 bg-white text-slate-700 hover:border-amber-500 hover:bg-amber-50 shadow-md"
                 >
