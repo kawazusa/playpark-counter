@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e" />
+      <stop offset="100%" stop-color="#15803d" />
+    </linearGradient>
+    <linearGradient id="warm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Background Base (for maskable icon support, rounded square/circle friendly) -->
+  <rect width="512" height="512" fill="#f0fdf4" rx="112" />
+
+  <!-- Main circular icon badge -->
+  <g filter="url(#shadow)">
+    <circle cx="256" cy="256" r="190" fill="url(#brand-grad)" />
+  </g>
+
+  <!-- Park/Nature Icon Details (Trees and Leaves) -->
+  <!-- Left Tree -->
+  <path d="M190,320 L230,320 C230,290 240,280 230,250 C220,220 200,210 190,180 C180,210 160,220 150,250 C140,280 150,290 150,320 Z" fill="#ffffff" opacity="0.9" />
+  <!-- Center Large Tree / Leaf -->
+  <path d="M256,120 C290,180 320,210 320,270 C320,330 291,360 256,360 C221,360 192,330 192,270 C192,210 222,180 256,120 Z" fill="url(#warm-grad)" />
+  <!-- Right Tree -->
+  <path d="M322,320 L362,320 C362,290 372,280 362,250 C352,220 332,210 322,180 C312,210 292,220 282,250 C272,280 282,290 282,320 Z" fill="#ffffff" opacity="0.9" />
+
+  <!-- Smiling face on the center leaf representing happy kids -->
+  <circle cx="236" cy="250" r="8" fill="#ffffff" />
+  <circle cx="276" cy="250" r="8" fill="#ffffff" />
+  <path d="M244,280 Q256,295 268,280" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none" />
+
+  <!-- Little ground/hills -->
+  <path d="M140,360 Q256,340 372,360 C390,363 410,380 410,380 L102,380 S120,363 140,360 Z" fill="#14532d" />
+</svg>
