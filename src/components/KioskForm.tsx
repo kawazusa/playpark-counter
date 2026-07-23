@@ -28,23 +28,29 @@ interface DisplayOption {
 }
 
 const SCHOOLS_DISPLAY: DisplayOption[] = [
-  { value: "江古田小", label: <span className="inline-block"><ruby>江古田小<rt>えごたしょう</rt></ruby></span> },
-  { value: "江原小", label: <span className="inline-block"><ruby>江原小<rt>えはらしょう</rt></ruby></span> },
-  { value: "緑野小", label: <span className="inline-block"><ruby>緑野小<rt>みどりのしょう</rt></ruby></span> },
-  { value: "その他中野区", label: <><span className="inline-block">その他</span><span className="inline-block"><ruby>中野区<rt>なかのく</rt></ruby></span></> },
-  { value: "練馬区", label: <span className="inline-block"><ruby>練馬区<rt>ねりまく</rt></ruby></span> },
-  { value: "その他（中野区・練馬区外）", label: <><span className="inline-block">その他（</span><span className="inline-block"><ruby>中野区<rt>なかのく</rt></ruby>・</span><span className="inline-block"><ruby>練馬区外<rt>ねりまくがい</rt></ruby>）</span></> },
-  { value: "中学生以上", label: <span className="inline-block"><ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby></span> }
+  { value: "江古田小", label: <span className="whitespace-nowrap"><ruby>江古田小<rt>えごたしょう</rt></ruby></span> },
+  { value: "江原小", label: <span className="whitespace-nowrap"><ruby>江原小<rt>えはらしょう</rt></ruby></span> },
+  { value: "緑野小", label: <span className="whitespace-nowrap"><ruby>緑野小<rt>みどりのしょう</rt></ruby></span> },
+  { value: "その他中野区", label: <span className="text-sm sm:text-base md:text-lg block"><span className="whitespace-nowrap">その他</span><span className="whitespace-nowrap"><ruby>中野区<rt>なかのく</rt></ruby></span></span> },
+  { value: "練馬区", label: <span className="whitespace-nowrap"><ruby>練馬区<rt>ねりまく</rt></ruby></span> },
+  { value: "その他（中野区・練馬区外）", label: (
+    <span className="text-xs sm:text-sm md:text-base leading-tight block">
+      <span className="whitespace-nowrap">その他（</span>
+      <span className="whitespace-nowrap"><ruby>中野区<rt>なかのく</rt></ruby>・</span>
+      <span className="whitespace-nowrap"><ruby>練馬区外<rt>ねりまくがい</rt></ruby>）</span>
+    </span>
+  ) },
+  { value: "中学生以上", label: <span className="whitespace-nowrap"><ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby></span> }
 ];
 
 const GRADES_DISPLAY: DisplayOption[] = [
-  { value: "1年生", label: <span className="inline-block">1<ruby>年生<rt>ねんせい</rt></ruby></span> },
-  { value: "2年生", label: <span className="inline-block">2<ruby>年生<rt>ねんせい</rt></ruby></span> },
-  { value: "3年生", label: <span className="inline-block">3<ruby>年生<rt>ねんせい</rt></ruby></span> },
-  { value: "4年生", label: <span className="inline-block">4<ruby>年生<rt>ねんせい</rt></ruby></span> },
-  { value: "5年生", label: <span className="inline-block">5<ruby>年生<rt>ねんせい</rt></ruby></span> },
-  { value: "6年生", label: <span className="inline-block">6<ruby>年生<rt>ねんせい</rt></ruby></span> },
-  { value: "中学生以上", label: <span className="inline-block"><ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby></span> }
+  { value: "1年生", label: <span className="whitespace-nowrap">1<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "2年生", label: <span className="whitespace-nowrap">2<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "3年生", label: <span className="whitespace-nowrap">3<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "4年生", label: <span className="whitespace-nowrap">4<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "5年生", label: <span className="whitespace-nowrap">5<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "6年生", label: <span className="whitespace-nowrap">6<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "中学生以上", label: <span className="whitespace-nowrap"><ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby></span> }
 ];
 
 const RESIDENCES = [
@@ -326,7 +332,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                     setKidsSchool(opt.value);
                     handleNext();
                   }}
-                  className={`py-5 px-4 text-lg md:text-xl font-bold rounded-2xl border-2 transition-all duration-150 active:scale-95 flex items-center justify-center text-center min-h-[84px] shadow-sm
+                  className={`py-5 px-2 text-base md:text-lg font-bold rounded-2xl border-2 transition-all duration-150 active:scale-95 flex items-center justify-center text-center min-h-[84px] shadow-sm
                     ${kidsSchool === opt.value 
                       ? 'border-emerald-600 bg-emerald-100/70 text-emerald-900 shadow-md ring-4 ring-emerald-200' 
                       : 'border-slate-100 bg-white text-slate-700 hover:border-emerald-500 hover:bg-emerald-50/50'}`}
@@ -361,7 +367,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                     setKidsGrade(opt.value);
                     handleNext();
                   }}
-                  className={`py-5 px-3 text-xl md:text-2xl font-black rounded-2xl border-2 transition-all duration-150 active:scale-95 flex items-center justify-center min-h-[80px] shadow-sm
+                  className={`py-5 px-2 text-base md:text-lg font-bold rounded-2xl border-2 transition-all duration-150 active:scale-95 flex items-center justify-center min-h-[80px] shadow-sm
                     ${kidsGrade === opt.value 
                       ? 'border-emerald-600 bg-emerald-100/70 text-emerald-900 shadow-md ring-4 ring-emerald-200' 
                       : 'border-slate-100 bg-white text-slate-700 hover:border-emerald-500 hover:bg-emerald-50/50'}`}
@@ -755,7 +761,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <button
                 onClick={resetForm}
-                className="flex-1 py-5 text-xl font-bold rounded-2xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all duration-150 active:scale-95 flex items-center justify-center gap-2.5"
+                className="flex-1 py-5 text-xl font-bold rounded-2xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all duration-150 active:scale-95 flex items-center justify-center gap-2.5 whitespace-nowrap"
               >
                 <RotateCcw className="w-6 h-6" />
                 {entryType === 'kids_only' ? (
@@ -767,7 +773,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               
               <button
                 onClick={handleRegister}
-                className={`flex-2 py-5 px-10 text-xl font-black rounded-2xl text-white shadow-xl transition-all duration-150 active:scale-95 flex items-center justify-center gap-3
+                className={`flex-2 py-5 px-10 text-xl font-black rounded-2xl text-white shadow-xl transition-all duration-150 active:scale-95 flex items-center justify-center gap-3 whitespace-nowrap
                   ${entryType === 'kids_only' 
                     ? 'bg-gradient-to-r from-emerald-500 to-brand-600 shadow-emerald-500/30 hover:brightness-105' 
                     : 'bg-gradient-to-r from-amber-500 to-amber-600 shadow-amber-500/30 hover:brightness-105'}`}
@@ -880,7 +886,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
 
             <button
               onClick={resetForm}
-              className="px-6 py-3.5 text-slate-450 hover:text-rose-600 font-bold flex items-center gap-2 rounded-xl hover:bg-rose-50 transition-all duration-150 text-base"
+              className="px-6 py-3.5 text-slate-450 hover:text-rose-600 font-bold flex items-center gap-2 rounded-xl hover:bg-rose-50 transition-all duration-150 text-base whitespace-nowrap"
             >
               <RotateCcw className="w-4 h-4" />
               {entryType === 'kids_only' ? (

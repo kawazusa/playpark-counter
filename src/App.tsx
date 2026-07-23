@@ -112,7 +112,7 @@ function App() {
                 あそび場 受付
               </h1>
               <p className="text-slate-500 text-lg md:text-xl font-bold mt-2.5">
-                遊びにきてくれてありがとう！とうろくをお願いします。
+                <span className="inline-block">遊びにきてくれてありがとう！</span><span className="inline-block">とうろくをお願いします。</span>
               </p>
             </div>
             
