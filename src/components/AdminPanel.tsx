@@ -355,7 +355,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
             className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-slate-800 transition mb-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            キオスク画面に戻る
+            受付（入力）画面に戻る
           </button>
           <h2 className="text-2xl font-extrabold text-slate-800 flex items-center gap-2">
             来場者データ管理
