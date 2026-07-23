@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { db } from '../db';
 import { 
   MapPin, 
@@ -109,6 +109,9 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
   // Announcement state
   const [announcement, setAnnouncement] = useState<string>('');
 
+  // Auto-reset timer ref
+  const autoResetTimerRef = useRef<any>(null);
+
   // Load announcement from localStorage
   useEffect(() => {
     const savedNotice = localStorage.getItem('playpark_announcement');
@@ -116,7 +119,20 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
     setAnnouncement(savedNotice || defaultNotice);
   }, [stepIndex]);
 
+  // Clean up auto reset timer on unmount
+  useEffect(() => {
+    return () => {
+      if (autoResetTimerRef.current) {
+        clearTimeout(autoResetTimerRef.current);
+      }
+    };
+  }, []);
+
   const resetForm = () => {
+    if (autoResetTimerRef.current) {
+      clearTimeout(autoResetTimerRef.current);
+      autoResetTimerRef.current = null;
+    }
     setEntryType('none');
     setStepIndex(0);
     
@@ -181,11 +197,13 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
       setStepIndex(99); // 99 means Success screen
       onSuccess();
       
-      // Auto reset success screen after 6 seconds (to give time to read announcements)
-      const timer = setTimeout(() => {
+      // Auto reset success screen after 30 seconds (to give plenty of time to read announcements)
+      if (autoResetTimerRef.current) {
+        clearTimeout(autoResetTimerRef.current);
+      }
+      autoResetTimerRef.current = setTimeout(() => {
         resetForm();
-      }, 6000);
-      return () => clearTimeout(timer);
+      }, 30000);
     } catch (error) {
       console.error("Failed to save record:", error);
       alert("登録に失敗しました。もう一度試してください。");
