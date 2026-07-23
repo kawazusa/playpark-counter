@@ -125,7 +125,7 @@ function App() {
 
       {/* Footer Area with Hidden Settings Icon */}
       <footer className="w-full max-w-4xl mx-auto flex justify-between items-center mt-6 pt-4 border-t border-slate-200/50 text-xs font-semibold text-slate-400">
-        <span>© 2026 Playpark Visitor Counter. All rights reserved.</span>
+        <span>© 2026 Playpark Counter Project (Developed by azusan). All rights reserved.</span>
         
         {/* Tactile hidden button or gear icon */}
         <button
