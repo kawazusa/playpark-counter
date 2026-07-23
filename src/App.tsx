@@ -107,7 +107,7 @@ function App() {
           <div className="w-full">
             {/* Visual Welcome Banner */}
             <div className="text-center mb-8 max-w-lg mx-auto">
-              <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-brand-650 tracking-tight flex items-center justify-center gap-3">
+              <h1 className="text-4xl md:text-5xl font-black text-slate-800 tracking-tight flex items-center justify-center gap-3">
                 <Sparkles className="w-8 h-8 text-amber-550 fill-amber-550/10 animate-pulse" />
                 あそび場 受付
               </h1>
