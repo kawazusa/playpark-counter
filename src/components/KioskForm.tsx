@@ -21,8 +21,31 @@ interface KioskFormProps {
   onSuccess: () => void;
 }
 
-const SCHOOLS = ["江古田小", "江原小", "緑野小", "その他中野区", "練馬区", "その他（中野区・練馬区外）", "中学生以上"];
-const GRADES = ["1年生", "2年生", "3年生", "4年生", "5年生", "6年生", "中学生以上"];
+
+interface DisplayOption {
+  value: string;
+  label: React.ReactNode;
+}
+
+const SCHOOLS_DISPLAY: DisplayOption[] = [
+  { value: "江古田小", label: <ruby>江古田小<rt>えごたしょう</rt></ruby> },
+  { value: "江原小", label: <ruby>江原小<rt>えはらしょう</rt></ruby> },
+  { value: "緑野小", label: <ruby>緑野小<rt>みどりのしょう</rt></ruby> },
+  { value: "その他中野区", label: <>その他<ruby>中野区<rt>なかのく</rt></ruby></> },
+  { value: "練馬区", label: <ruby>練馬区<rt>ねりまく</rt></ruby> },
+  { value: "その他（中野区・練馬区外）", label: <>その他（<ruby>中野区<rt>なかのく</rt></ruby>・<ruby>練馬区外<rt>ねりまくがい</rt></ruby>）</> },
+  { value: "中学生以上", label: <ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby> }
+];
+
+const GRADES_DISPLAY: DisplayOption[] = [
+  { value: "1年生", label: <>1<ruby>年生<rt>ねんせい</rt></ruby></> },
+  { value: "2年生", label: <>2<ruby>年生<rt>ねんせい</rt></ruby></> },
+  { value: "3年生", label: <>3<ruby>年生<rt>ねんせい</rt></ruby></> },
+  { value: "4年生", label: <>4<ruby>年生<rt>ねんせい</rt></ruby></> },
+  { value: "5年生", label: <>5<ruby>年生<rt>ねんせい</rt></ruby></> },
+  { value: "6年生", label: <>6<ruby>年生<rt>ねんせい</rt></ruby></> },
+  { value: "中学生以上", label: <ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby> }
+];
 
 const RESIDENCES = [
   "中野区（江古田・沼袋）", 
@@ -220,8 +243,12 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="inline-flex p-4.5 bg-emerald-50 rounded-3xl text-emerald-600 mb-4 animate-bounce-subtle border border-emerald-100/50 shadow-sm">
                 <Smile className="w-12 h-12" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">受付をえらんでね！</h2>
-              <p className="text-slate-500 text-lg md:text-xl font-medium mt-2">あてはまる方をタッチしてください</p>
+              <h2 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">
+                <ruby>受付<rt>うけつけ</rt></ruby>をえらんでね！
+              </h2>
+              <p className="text-slate-500 text-lg md:text-xl font-medium mt-2">
+                あてはまる<ruby>方<rt>ほう</rt></ruby>をタッチしてください
+              </p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-6">
@@ -238,9 +265,11 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                   <GraduationCap className="w-12 h-12" />
                 </div>
                 <div>
-                  <span className="text-2xl md:text-3xl font-black block">子どもだけで来た</span>
+                  <span className="text-2xl md:text-3xl font-black block">
+                    <ruby>子<rt>こ</rt></ruby>どもだけで<ruby>来<rt>き</rt></ruby>た
+                  </span>
                   <span className="text-sm text-emerald-700 font-bold mt-2 block bg-emerald-100/60 px-3 py-1 rounded-full">
-                    （小中学生グループなど）
+                    （<ruby>小中学生<rt>しょうちゅうがくせい</rt></ruby>グループなど）
                   </span>
                 </div>
               </button>
@@ -258,9 +287,11 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                   <Users className="w-12 h-12" />
                 </div>
                 <div>
-                  <span className="text-2xl md:text-3xl font-black block">親子・おとなだけ</span>
-                  <span className="text-sm text-amber-700 font-bold mt-2 block bg-amber-100/60 px-3 py-1 rounded-full">
-                    （保護者同伴・大人のみなど）
+                  <span className="text-2xl md:text-3xl font-black block">
+                    <ruby>親子<rt>おやこ</rt></ruby>・おとなだけ
+                  </span>
+                  <span className="text-sm text-amber-700 font-bold mt-2 block bg-emerald-100/60 px-3 py-1 rounded-full">
+                    （<ruby>保護者同伴<rt>ほごしゃどうはん</rt></ruby>・<ruby>大人<rt>おとな</rt></ruby>のみなど）
                   </span>
                 </div>
               </button>
@@ -279,24 +310,28 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="inline-flex p-3.5 bg-emerald-50 rounded-2xl text-emerald-600 mb-3 border border-emerald-100">
                 <SchoolIcon className="w-9 h-9" />
               </div>
-              <h2 className="text-3xl font-black text-slate-800 tracking-tight">学校はどこですか？</h2>
-              <p className="text-slate-500 text-lg font-bold mt-1">通っている学校をえらんでね</p>
+              <h2 className="text-3xl font-black text-slate-800 tracking-tight">
+                <ruby>学校<rt>がっこう</rt></ruby>はどこですか？
+              </h2>
+              <p className="text-slate-500 text-lg font-bold mt-1">
+                <ruby>通<rt>かよ</rt></ruby>っている<ruby>学校<rt>がっこう</rt></ruby>をえらんでね
+              </p>
             </div>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {SCHOOLS.map((schoolOption) => (
+              {SCHOOLS_DISPLAY.map((opt) => (
                 <button
-                  key={schoolOption}
+                  key={opt.value}
                   onClick={() => {
-                    setKidsSchool(schoolOption);
+                    setKidsSchool(opt.value);
                     handleNext();
                   }}
                   className={`py-5 px-4 text-lg md:text-xl font-bold rounded-2xl border-2 transition-all duration-150 active:scale-95 flex items-center justify-center text-center min-h-[84px] shadow-sm
-                    ${kidsSchool === schoolOption 
+                    ${kidsSchool === opt.value 
                       ? 'border-emerald-600 bg-emerald-100/70 text-emerald-900 shadow-md ring-4 ring-emerald-200' 
                       : 'border-slate-100 bg-white text-slate-700 hover:border-emerald-500 hover:bg-emerald-50/50'}`}
                 >
-                  {schoolOption}
+                  {opt.label}
                 </button>
               ))}
             </div>
@@ -310,24 +345,28 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="inline-flex p-3.5 bg-emerald-50 rounded-2xl text-emerald-600 mb-3 border border-emerald-100">
                 <GraduationCap className="w-9 h-9" />
               </div>
-              <h2 className="text-3xl font-black text-slate-800 tracking-tight">学年はいくつですか？</h2>
-              <p className="text-slate-500 text-lg font-bold mt-1">あてはまる学年をえらんでね</p>
+              <h2 className="text-3xl font-black text-slate-800 tracking-tight">
+                <ruby>学年<rt>がくねん</rt></ruby>はいくつですか？
+              </h2>
+              <p className="text-slate-500 text-lg font-bold mt-1">
+                あてはまる<ruby>学年<rt>がくねん</rt></ruby>をえらんでね
+              </p>
             </div>
             
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {GRADES.map((gradeOption) => (
+              {GRADES_DISPLAY.map((opt) => (
                 <button
-                  key={gradeOption}
+                  key={opt.value}
                   onClick={() => {
-                    setKidsGrade(gradeOption);
+                    setKidsGrade(opt.value);
                     handleNext();
                   }}
                   className={`py-5 px-3 text-xl md:text-2xl font-black rounded-2xl border-2 transition-all duration-150 active:scale-95 flex items-center justify-center min-h-[80px] shadow-sm
-                    ${kidsGrade === gradeOption 
+                    ${kidsGrade === opt.value 
                       ? 'border-emerald-600 bg-emerald-100/70 text-emerald-900 shadow-md ring-4 ring-emerald-200' 
                       : 'border-slate-100 bg-white text-slate-700 hover:border-emerald-500 hover:bg-emerald-50/50'}`}
                 >
-                  {gradeOption}
+                  {opt.label}
                 </button>
               ))}
             </div>
@@ -341,8 +380,12 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="inline-flex p-3.5 bg-emerald-50 rounded-2xl text-emerald-600 mb-3 border border-emerald-100">
                 <Users className="w-9 h-9" />
               </div>
-              <h2 className="text-3xl font-black text-slate-800 tracking-tight">いっしょにいる人数は何人？</h2>
-              <p className="text-slate-500 text-lg font-bold mt-1">グループ全員の人数をえらんでね</p>
+              <h2 className="text-3xl font-black text-slate-800 tracking-tight">
+                いっしょにいる<ruby>人数<rt>にんずう</rt></ruby>は<ruby>何人<rt>なんにん</rt></ruby>？
+              </h2>
+              <p className="text-slate-500 text-lg font-bold mt-1">
+                グループ<ruby>全員<rt>ぜんいん</rt></ruby>の<ruby>人数<rt>にんずう</rt></ruby>をえらんでね
+              </p>
             </div>
             
             <div className="flex flex-wrap justify-center gap-4">
@@ -359,7 +402,11 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                       : 'border-slate-100 bg-white text-slate-700 hover:border-emerald-500 hover:bg-emerald-50/50'}`}
                 >
                   <span>{num}</span>
-                  <span className="text-sm font-bold text-slate-400 mt-1.5">{num === 5 ? '人以上' : '人'}</span>
+                  <span className="text-sm font-bold text-slate-400 mt-1.5">
+                    {num === 5 
+                      ? <><ruby>人以上<rt>にんいじょう</rt></ruby></> 
+                      : <><ruby>人<rt>にん</rt></ruby></>}
+                  </span>
                 </button>
               ))}
             </div>
@@ -413,7 +460,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <p className="text-slate-500 text-lg font-bold mt-1">あてはまる人全員をえらんでね（複数えらべます）</p>
             </div>
             
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-8">
               {ADULT_RELATIONS.map((relation) => {
                 const isSelected = selectedAdults.includes(relation);
                 return (
@@ -421,13 +468,13 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                     key={relation}
                     type="button"
                     onClick={() => toggleAdult(relation)}
-                    className={`py-6 px-5 text-2xl font-black rounded-3xl border-2 transition-all duration-150 flex items-center justify-center gap-4 min-h-[96px] shadow-sm
+                    className={`py-5 px-3 text-lg md:text-xl font-bold rounded-2xl border-2 transition-all duration-100 flex items-center justify-center gap-2.5 min-h-[64px] shadow-sm
                       ${isSelected 
-                        ? 'border-amber-600 bg-amber-100/70 text-amber-900 shadow-md ring-4 ring-amber-200 scale-[1.02]' 
+                        ? 'border-amber-600 bg-amber-100/70 text-amber-900 shadow-md ring-3 ring-amber-200' 
                         : 'border-slate-100 bg-white text-slate-700 hover:border-amber-500 hover:bg-amber-50/30'}`}
                   >
-                    <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all
-                      ${isSelected ? 'border-amber-600 bg-amber-650 text-white shadow-inner' : 'border-slate-300 bg-white'}`}
+                    <div className={`w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all
+                      ${isSelected ? 'border-amber-600 bg-amber-600 text-white shadow-inner' : 'border-slate-300 bg-white'}`}
                     >
                       {isSelected && <span className="text-sm font-black">✓</span>}
                     </div>
@@ -515,7 +562,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
         {entryType === 'family_adult' && currentStep === 'first_time' && (
           <div className="animate-slide-up">
             <div className="text-center mb-8">
-              <div className="inline-flex p-3.5 bg-amber-50 rounded-2xl text-amber-600 mb-3 border border-amber-100">
+              <div className="inline-flex p-3.5 bg-amber-50 rounded-2xl text-amber-605 mb-3 border border-amber-100">
                 <HelpCircle className="w-9 h-9" />
               </div>
               <h2 className="text-3xl font-black text-slate-800 tracking-tight">この遊び場は初めてですか？</h2>
@@ -582,7 +629,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                       setFirstTime(null);
                       setVisitReason('');
                     }}
-                    className="px-5 py-3 text-sm font-bold text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition"
+                    className="px-5 py-3 text-sm font-bold text-slate-400 hover:text-slate-650 rounded-xl hover:bg-slate-100 transition"
                   >
                     やり直す
                   </button>
@@ -615,8 +662,20 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="inline-flex p-3.5 bg-brand-50 rounded-2xl text-brand-600 mb-3 border border-brand-100">
                 <Heart className="w-9 h-9 text-emerald-600 fill-emerald-600/10" />
               </div>
-              <h2 className="text-3xl font-black text-slate-800 tracking-tight">この内容で登録しますか？</h2>
-              <p className="text-slate-500 text-lg font-bold mt-1">まちがいがないか確認してね</p>
+              <h2 className="text-3xl font-black text-slate-800 tracking-tight">
+                {entryType === 'kids_only' ? (
+                  <><ruby>内容<rt>ないよう</rt></ruby>はあっているかな？</>
+                ) : (
+                  "この内容で登録しますか？"
+                )}
+              </h2>
+              <p className="text-slate-500 text-lg font-bold mt-1">
+                {entryType === 'kids_only' ? (
+                  <>まちがいがないか<ruby>確認<rt>かくにん</rt></ruby>してね</>
+                ) : (
+                  "まちがいがないか確認してね"
+                )}
+              </p>
             </div>
 
             {/* Kids only Confirmation Details */}
@@ -624,24 +683,28 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="bg-emerald-50/40 rounded-3xl p-8 border border-emerald-100/50 mb-8 grid grid-cols-2 gap-4 shadow-inner">
                 <div className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm col-span-2">
                   <span className="text-xs font-bold text-emerald-800 mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
-                    <SchoolIcon className="w-4 h-4" /> 通っている学校
-                  </span>
-                  <span className="text-2xl font-black text-slate-800">{kidsSchool}</span>
-                </div>
-
-                <div className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                  <span className="text-xs font-bold text-emerald-800 mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
-                    <GraduationCap className="w-4 h-4" /> 学年
-                  </span>
-                  <span className="text-2xl font-black text-slate-800">{kidsGrade}</span>
-                </div>
-
-                <div className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                  <span className="text-xs font-bold text-emerald-800 mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
-                    <Users className="w-4 h-4" /> 来場人数
+                    <SchoolIcon className="w-4 h-4" /> <ruby>学校<rt>がっこう</rt></ruby>
                   </span>
                   <span className="text-2xl font-black text-slate-800">
-                    {kidsHeadcount} 人{kidsHeadcount === 5 ? '以上' : ''}
+                    {SCHOOLS_DISPLAY.find(s => s.value === kidsSchool)?.label || kidsSchool}
+                  </span>
+                </div>
+
+                <div className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                  <span className="text-xs font-bold text-emerald-800 mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
+                    <GraduationCap className="w-4 h-4" /> <ruby>学年<rt>がくねん</rt></ruby>
+                  </span>
+                  <span className="text-2xl font-black text-slate-800">
+                    {GRADES_DISPLAY.find(g => g.value === kidsGrade)?.label || kidsGrade}
+                  </span>
+                </div>
+
+                <div className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                  <span className="text-xs font-bold text-emerald-800 mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
+                    <Users className="w-4 h-4" /> <ruby>人数<rt>にんずう</rt></ruby>
+                  </span>
+                  <span className="text-2xl font-black text-slate-800">
+                    {kidsHeadcount} <ruby>人<rt>にん</rt></ruby>{kidsHeadcount === 5 ? <><ruby>以上<rt>いじょう</rt></ruby></> : ''}
                   </span>
                 </div>
               </div>
@@ -660,7 +723,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
 
                   <div className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
                     <span className="text-xs font-bold text-amber-800 mb-1.5 flex items-center gap-1.5 uppercase tracking-wide">
-                      <Users className="w-4 h-4" /> お大人
+                      <Users className="w-4 h-4" /> おとな
                     </span>
                     <span className="text-base font-black text-slate-700">
                       {selectedAdults.length > 0 ? selectedAdults.join("、") : "大人のみ登録"}
@@ -695,7 +758,11 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 className="flex-1 py-5 text-xl font-bold rounded-2xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all duration-150 active:scale-95 flex items-center justify-center gap-2.5"
               >
                 <RotateCcw className="w-6 h-6" />
-                最初からやり直す
+                {entryType === 'kids_only' ? (
+                  <><ruby>最初<rt>さいしょ</rt></ruby>からやり<ruby>直<rt>なお</rt></ruby>す</>
+                ) : (
+                  "最初からやり直す"
+                )}
               </button>
               
               <button
@@ -706,7 +773,11 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                     : 'bg-gradient-to-r from-amber-500 to-amber-600 shadow-amber-500/30 hover:brightness-105'}`}
               >
                 <Sparkles className="w-6 h-6" />
-                登録する！
+                {entryType === 'kids_only' ? (
+                  <><ruby>登録<rt>とうろく</rt></ruby>する！</>
+                ) : (
+                  "登録する！"
+                )}
               </button>
             </div>
           </div>
@@ -721,8 +792,20 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-4 animate-bounce-subtle shadow-md">
                 <CheckCircle2 className="w-16 h-16" />
               </div>
-              <h2 className="text-4xl font-black text-slate-800 tracking-tight mb-2">登録が完了しました！</h2>
-              <p className="text-emerald-700 font-bold text-lg">プレイパークへようこそ！たくさん遊んでいってね！</p>
+              <h2 className="text-4xl font-black text-slate-800 tracking-tight mb-2">
+                {entryType === 'kids_only' ? (
+                  <><ruby>登録<rt>とうろく</rt></ruby>ができたよ！</>
+                ) : (
+                  "登録が完了しました！"
+                )}
+              </h2>
+              <p className="text-emerald-700 font-bold text-lg">
+                {entryType === 'kids_only' ? (
+                  <>プレイパークへようこそ！たくさん<ruby>遊<rt>あそ</rt></ruby>んでいってね！</>
+                ) : (
+                  "プレイパークへようこそ！たくさん遊んでいってね！"
+                )}
+              </p>
             </div>
 
             {/* Playpark Announcement Noticeboard */}
@@ -731,7 +814,13 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               
               <div className="flex items-center gap-2 mb-3.5 pb-2.5 border-b border-amber-200/50">
                 <Megaphone className="w-6 h-6 text-amber-600 fill-amber-600/10 animate-pulse" />
-                <span className="text-lg font-black text-amber-900">プレイパークからのお知らせ</span>
+                <span className="text-lg font-black text-amber-900">
+                  {entryType === 'kids_only' ? (
+                    <>プレイパークからのお知らせ</>
+                  ) : (
+                    "プレイパークからのお知らせ"
+                  )}
+                </span>
               </div>
               
               {/* Notice text */}
@@ -749,11 +838,19 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                     ? 'bg-emerald-600 hover:bg-emerald-750 shadow-emerald-600/10' 
                     : 'bg-amber-600 hover:bg-amber-750 shadow-amber-600/10'}`}
               >
-                確認しました（最初の画面にもどる）
+                {entryType === 'kids_only' ? (
+                  <><ruby>確認<rt>かくにん</rt></ruby>しました（<ruby>最初<rt>さいしょ</rt></ruby>の<ruby>画面<rt>がめん</rt></ruby>にもどる）</>
+                ) : (
+                  "確認しました（最初の画面にもどる）"
+                )}
               </button>
               
               <span className="text-xs text-slate-400 font-semibold animate-pulse">
-                ※ボタンを押さない場合、まもなく自動で最初の画面に戻ります
+                {entryType === 'kids_only' ? (
+                  <>※ボタンを<ruby>押<rt>お</rt></ruby>さないときも、すこし待つと<ruby>自動<rt>じどう</rt></ruby>で<ruby>最初<rt>さいしょ</rt></ruby>の<ruby>画面<rt>がめん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>ります</>
+                ) : (
+                  "※ボタンを押さない場合、まもなく自動で最初の画面に戻ります"
+                )}
               </span>
             </div>
 
@@ -786,7 +883,11 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               className="px-6 py-3.5 text-slate-450 hover:text-rose-600 font-bold flex items-center gap-2 rounded-xl hover:bg-rose-50 transition-all duration-150 text-base"
             >
               <RotateCcw className="w-4 h-4" />
-              最初から
+              {entryType === 'kids_only' ? (
+                <><ruby>最初<rt>さいしょ</rt></ruby>から</>
+              ) : (
+                "最初から"
+              )}
             </button>
           </div>
         )}
