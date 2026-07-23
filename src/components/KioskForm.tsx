@@ -28,23 +28,23 @@ interface DisplayOption {
 }
 
 const SCHOOLS_DISPLAY: DisplayOption[] = [
-  { value: "江古田小", label: <ruby>江古田小<rt>えごたしょう</rt></ruby> },
-  { value: "江原小", label: <ruby>江原小<rt>えはらしょう</rt></ruby> },
-  { value: "緑野小", label: <ruby>緑野小<rt>みどりのしょう</rt></ruby> },
-  { value: "その他中野区", label: <>その他<ruby>中野区<rt>なかのく</rt></ruby></> },
-  { value: "練馬区", label: <ruby>練馬区<rt>ねりまく</rt></ruby> },
-  { value: "その他（中野区・練馬区外）", label: <>その他（<ruby>中野区<rt>なかのく</rt></ruby>・<ruby>練馬区外<rt>ねりまくがい</rt></ruby>）</> },
-  { value: "中学生以上", label: <ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby> }
+  { value: "江古田小", label: <span className="inline-block"><ruby>江古田小<rt>えごたしょう</rt></ruby></span> },
+  { value: "江原小", label: <span className="inline-block"><ruby>江原小<rt>えはらしょう</rt></ruby></span> },
+  { value: "緑野小", label: <span className="inline-block"><ruby>緑野小<rt>みどりのしょう</rt></ruby></span> },
+  { value: "その他中野区", label: <><span className="inline-block">その他</span><span className="inline-block"><ruby>中野区<rt>なかのく</rt></ruby></span></> },
+  { value: "練馬区", label: <span className="inline-block"><ruby>練馬区<rt>ねりまく</rt></ruby></span> },
+  { value: "その他（中野区・練馬区外）", label: <><span className="inline-block">その他（</span><span className="inline-block"><ruby>中野区<rt>なかのく</rt></ruby>・</span><span className="inline-block"><ruby>練馬区外<rt>ねりまくがい</rt></ruby>）</span></> },
+  { value: "中学生以上", label: <span className="inline-block"><ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby></span> }
 ];
 
 const GRADES_DISPLAY: DisplayOption[] = [
-  { value: "1年生", label: <>1<ruby>年生<rt>ねんせい</rt></ruby></> },
-  { value: "2年生", label: <>2<ruby>年生<rt>ねんせい</rt></ruby></> },
-  { value: "3年生", label: <>3<ruby>年生<rt>ねんせい</rt></ruby></> },
-  { value: "4年生", label: <>4<ruby>年生<rt>ねんせい</rt></ruby></> },
-  { value: "5年生", label: <>5<ruby>年生<rt>ねんせい</rt></ruby></> },
-  { value: "6年生", label: <>6<ruby>年生<rt>ねんせい</rt></ruby></> },
-  { value: "中学生以上", label: <ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby> }
+  { value: "1年生", label: <span className="inline-block">1<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "2年生", label: <span className="inline-block">2<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "3年生", label: <span className="inline-block">3<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "4年生", label: <span className="inline-block">4<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "5年生", label: <span className="inline-block">5<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "6年生", label: <span className="inline-block">6<ruby>年生<rt>ねんせい</rt></ruby></span> },
+  { value: "中学生以上", label: <span className="inline-block"><ruby>中学生以上<rt>ちゅうがくせいいじょう</rt></ruby></span> }
 ];
 
 const RESIDENCES = [
@@ -244,10 +244,10 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 <Smile className="w-12 h-12" />
               </div>
               <h2 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">
-                <ruby>受付<rt>うけつけ</rt></ruby>をえらんでね！
+                <span className="inline-block"><ruby>受付<rt>うけつけ</rt></ruby>を</span><span className="inline-block">えらんでね！</span>
               </h2>
               <p className="text-slate-500 text-lg md:text-xl font-medium mt-2">
-                あてはまる<ruby>方<rt>ほう</rt></ruby>をタッチしてください
+                <span className="inline-block">あてはまる<ruby>方<rt>ほう</rt></ruby>を</span><span className="inline-block">タッチしてください</span>
               </p>
             </div>
             
@@ -266,10 +266,10 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 </div>
                 <div>
                   <span className="text-2xl md:text-3xl font-black block">
-                    <ruby>子<rt>こ</rt></ruby>どもだけで<ruby>来<rt>き</rt></ruby>た
+                    <span className="inline-block"><ruby>子<rt>こ</rt></ruby>どもだけで</span><span className="inline-block"><ruby>来<rt>き</rt></ruby>た</span>
                   </span>
                   <span className="text-sm text-emerald-700 font-bold mt-2 block bg-emerald-100/60 px-3 py-1 rounded-full">
-                    （<ruby>小中学生<rt>しょうちゅうがくせい</rt></ruby>グループなど）
+                    <span className="inline-block">（<ruby>小中学生<rt>しょうちゅうがくせい</rt></ruby></span><span className="inline-block">グループなど）</span>
                   </span>
                 </div>
               </button>
@@ -288,10 +288,10 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 </div>
                 <div>
                   <span className="text-2xl md:text-3xl font-black block">
-                    <ruby>親子<rt>おやこ</rt></ruby>・おとなだけ
+                    <span className="inline-block"><ruby>親子<rt>おやこ</rt></ruby>・</span><span className="inline-block">おとなだけ</span>
                   </span>
-                  <span className="text-sm text-amber-700 font-bold mt-2 block bg-emerald-100/60 px-3 py-1 rounded-full">
-                    （<ruby>保護者同伴<rt>ほごしゃどうはん</rt></ruby>・<ruby>大人<rt>おとな</rt></ruby>のみなど）
+                  <span className="text-sm text-amber-700 font-bold mt-2 block bg-amber-100/60 px-3 py-1 rounded-full">
+                    <span className="inline-block">（<ruby>保護者同伴<rt>ほごしゃどうはん</rt></ruby>・</span><span className="inline-block"><ruby>大人<rt>おとな</rt></ruby>のみなど）</span>
                   </span>
                 </div>
               </button>
@@ -311,10 +311,10 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 <SchoolIcon className="w-9 h-9" />
               </div>
               <h2 className="text-3xl font-black text-slate-800 tracking-tight">
-                <ruby>学校<rt>がっこう</rt></ruby>はどこですか？
+                <span className="inline-block"><ruby>学校<rt>がっこう</rt></ruby>は</span><span className="inline-block">どこですか？</span>
               </h2>
               <p className="text-slate-500 text-lg font-bold mt-1">
-                <ruby>通<rt>かよ</rt></ruby>っている<ruby>学校<rt>がっこう</rt></ruby>をえらんでね
+                <span className="inline-block"><ruby>通<rt>かよ</rt></ruby>っている</span><span className="inline-block"><ruby>学校<rt>がっこう</rt></ruby>をえらんでね</span>
               </p>
             </div>
             
@@ -346,10 +346,10 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 <GraduationCap className="w-9 h-9" />
               </div>
               <h2 className="text-3xl font-black text-slate-800 tracking-tight">
-                <ruby>学年<rt>がくねん</rt></ruby>はいくつですか？
+                <span className="inline-block"><ruby>学年<rt>がくねん</rt></ruby>は</span><span className="inline-block">いくつですか？</span>
               </h2>
               <p className="text-slate-500 text-lg font-bold mt-1">
-                あてはまる<ruby>学年<rt>がくねん</rt></ruby>をえらんでね
+                <span className="inline-block">あてはまる</span><span className="inline-block"><ruby>学年<rt>がくねん</rt></ruby>をえらんでね</span>
               </p>
             </div>
             
@@ -381,10 +381,10 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 <Users className="w-9 h-9" />
               </div>
               <h2 className="text-3xl font-black text-slate-800 tracking-tight">
-                いっしょにいる<ruby>人数<rt>にんずう</rt></ruby>は<ruby>何人<rt>なんにん</rt></ruby>？
+                <span className="inline-block">いっしょにいる</span><span className="inline-block"><ruby>人数<rt>にんずう</rt></ruby>は<ruby>何人<rt>なんにん</rt></ruby>？</span>
               </h2>
               <p className="text-slate-500 text-lg font-bold mt-1">
-                グループ<ruby>全員<rt>ぜんいん</rt></ruby>の<ruby>人数<rt>にんずう</rt></ruby>をえらんでね
+                <span className="inline-block">グループ<ruby>全員<rt>ぜんいん</rt></ruby>の</span><span className="inline-block"><ruby>人数<rt>にんずう</rt></ruby>をえらんでね</span>
               </p>
             </div>
             
@@ -664,16 +664,16 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               </div>
               <h2 className="text-3xl font-black text-slate-800 tracking-tight">
                 {entryType === 'kids_only' ? (
-                  <><ruby>内容<rt>ないよう</rt></ruby>はあっているかな？</>
+                  <><span className="inline-block"><ruby>内容<rt>ないよう</rt></ruby>は</span><span className="inline-block">あっているかな？</span></>
                 ) : (
-                  "この内容で登録しますか？"
+                  <><span className="inline-block">この内容で</span><span className="inline-block">登録しますか？</span></>
                 )}
               </h2>
               <p className="text-slate-500 text-lg font-bold mt-1">
                 {entryType === 'kids_only' ? (
-                  <>まちがいがないか<ruby>確認<rt>かくにん</rt></ruby>してね</>
+                  <><span className="inline-block">まちがいがないか</span><span className="inline-block"><ruby>確認<rt>かくにん</rt></ruby>してね</span></>
                 ) : (
-                  "まちがいがないか確認してね"
+                  <><span className="inline-block">まちがいがないか</span><span className="inline-block">確認してね</span></>
                 )}
               </p>
             </div>
@@ -794,16 +794,16 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
               </div>
               <h2 className="text-4xl font-black text-slate-800 tracking-tight mb-2">
                 {entryType === 'kids_only' ? (
-                  <><ruby>登録<rt>とうろく</rt></ruby>ができたよ！</>
+                  <><span className="inline-block"><ruby>登録<rt>とうろく</rt></ruby>が</span><span className="inline-block">できたよ！</span></>
                 ) : (
-                  "登録が完了しました！"
+                  <><span className="inline-block">登録が</span><span className="inline-block">完了しました！</span></>
                 )}
               </h2>
               <p className="text-emerald-700 font-bold text-lg">
                 {entryType === 'kids_only' ? (
-                  <>プレイパークへようこそ！たくさん<ruby>遊<rt>あそ</rt></ruby>んでいってね！</>
+                  <><span className="inline-block">プレイパークへようこそ！</span><span className="inline-block">たくさん<ruby>遊<rt>あそ</rt></ruby>んでいってね！</span></>
                 ) : (
-                  "プレイパークへようこそ！たくさん遊んでいってね！"
+                  <><span className="inline-block">プレイパークへようこそ！</span><span className="inline-block">たくさん遊んでいってね！</span></>
                 )}
               </p>
             </div>
@@ -816,7 +816,7 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                 <Megaphone className="w-6 h-6 text-amber-600 fill-amber-600/10 animate-pulse" />
                 <span className="text-lg font-black text-amber-900">
                   {entryType === 'kids_only' ? (
-                    <>プレイパークからのお知らせ</>
+                    <><span className="inline-block">プレイパークからの</span><span className="inline-block">お知らせ</span></>
                   ) : (
                     "プレイパークからのお知らせ"
                   )}
@@ -839,17 +839,17 @@ export const KioskForm: React.FC<KioskFormProps> = ({ onSuccess }) => {
                     : 'bg-amber-600 hover:bg-amber-750 shadow-amber-600/10'}`}
               >
                 {entryType === 'kids_only' ? (
-                  <><ruby>確認<rt>かくにん</rt></ruby>しました（<ruby>最初<rt>さいしょ</rt></ruby>の<ruby>画面<rt>がめん</rt></ruby>にもどる）</>
+                  <><span className="inline-block"><ruby>確認<rt>かくにん</rt></ruby>しました</span><span className="inline-block">（<ruby>最初<rt>さいしょ</rt></ruby>の<ruby>画面<rt>がめん</rt></ruby>にもどる）</span></>
                 ) : (
-                  "確認しました（最初の画面にもどる）"
+                  <><span className="inline-block">確認しました</span><span className="inline-block">（最初の画面にもどる）</span></>
                 )}
               </button>
               
-              <span className="text-xs text-slate-400 font-semibold animate-pulse">
+              <span className="text-xs text-slate-400 font-semibold animate-pulse block">
                 {entryType === 'kids_only' ? (
-                  <>※ボタンを<ruby>押<rt>お</rt></ruby>さないときも、すこし待つと<ruby>自動<rt>じどう</rt></ruby>で<ruby>最初<rt>さいしょ</rt></ruby>の<ruby>画面<rt>がめん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>ります</>
+                  <><span className="inline-block">※ボタンを<ruby>押<rt>お</rt></ruby>さないときも、</span><span className="inline-block">すこし待つと<ruby>自動<rt>じどう</rt></ruby>で</span><span className="inline-block"><ruby>最初<rt>さいしょ</rt></ruby>の<ruby>画面<rt>がめん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>ります</span></>
                 ) : (
-                  "※ボタンを押さない場合、まもなく自動で最初の画面に戻ります"
+                  <><span className="inline-block">※ボタンを押さない場合、</span><span className="inline-block">まもなく自動で最初の画面に戻ります</span></>
                 )}
               </span>
             </div>
